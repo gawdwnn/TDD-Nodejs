@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../src/app.js';
-import sequelize from '../src/config/database.js';
+import sequelize from '../config/database.js';
 import User from '../src/user/User.js';
 
 beforeAll(() => sequelize.sync());
