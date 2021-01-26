@@ -34,9 +34,10 @@
     "eslint-plugin-prettier": "^3.3.1",
     "jest": "^26.6.3",
     "jest-esm-transformer": "^1.0.0",
-    "nodemailer-stub": "^1.2.2",
+    "jest-watch-typeahead": "^0.6.1",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
+    "smtp-server": "^3.8.0",
     "supertest": "^6.1.1"
   },
   "eslintConfig": {
@@ -67,6 +68,10 @@
   "jest": {
     "transform": {
       "\\.m?jsx?$": "jest-esm-transformer"
-    }
+    },
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
   }
 }
