@@ -4,6 +4,7 @@ import User from './User.js';
 import EmailService from '../email/EmailService.js';
 import sequelize from '../../config/database.js';
 import EmailException from '../email/EmailException.js';
+import InvalidTokenException from './InvalidTokenException.js';
 
 const generateToken = (length) => {
   return crypto.randomBytes(length).toString('hex').substring(0, length);
@@ -28,4 +29,14 @@ const findByEmail = async (email) => {
   return await User.findOne({ where: { email: email } });
 };
 
-export default { save, findByEmail };
+const activate = async (token) => {
+  const user = await User.findOne({ where: { activationToken: token } });
+  if (!user) {
+    throw new InvalidTokenException();
+  }
+  user.inactive = false;
+  user.activationToken = null;
+  await user.save();
+};
+
+export default { save, findByEmail, activate };
