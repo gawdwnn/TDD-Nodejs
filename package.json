@@ -12,7 +12,7 @@
   "type": "module",
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon index",
-    "test": "cross-env NODE_ENV=test jest --watch",
+    "test": "cross-env NODE_ENV=test jest --watch --verbose",
     "lint": "eslint ."
   },
   "dependencies": {
