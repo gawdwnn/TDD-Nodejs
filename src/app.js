@@ -4,6 +4,7 @@ import Backend from 'i18next-fs-backend';
 import middleware from 'i18next-http-middleware';
 import ErrorHandler from './error/ErrorHandler.js';
 import UserRouter from './user/UserRouter.js';
+import AuthenticationRouter from './auth/AuthenticationRouter.js';
 
 i18next
   .use(Backend)
@@ -28,6 +29,7 @@ app.use(middleware.handle(i18next));
 app.use(express.json());
 
 app.use(UserRouter);
+app.use(AuthenticationRouter);
 
 app.use(ErrorHandler);
 
