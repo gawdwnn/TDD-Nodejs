@@ -5,6 +5,7 @@ import EmailService from '../email/EmailService.js';
 import sequelize from '../../config/database.js';
 import EmailException from '../email/EmailException.js';
 import InvalidTokenException from './InvalidTokenException.js';
+import UserNotFoundException from './UserNotFoundException.js';
 
 const generateToken = (length) => {
   return crypto.randomBytes(length).toString('hex').substring(0, length);
@@ -55,4 +56,18 @@ const getUsers = async (page, size) => {
   };
 };
 
-export default { save, findByEmail, activate, getUsers };
+const getUser = async (id) => {
+  const user = await User.findOne({
+    where: {
+      id: id,
+      inactive: false,
+    },
+    attributes: ['id', 'username', 'email'],
+  });
+  if (!user) {
+    throw new UserNotFoundException();
+  }
+  return user;
+};
+
+export default { save, findByEmail, activate, getUsers, getUser };

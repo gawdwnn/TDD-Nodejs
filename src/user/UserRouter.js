@@ -66,4 +66,13 @@ router.get('/api/1.0/users', pagination, async (req, res) => {
   res.send(users);
 });
 
+router.get('/api/1.0/users/:id', async (req, res, next) => {
+  try {
+    const user = await UserService.getUser(req.params.id);
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;
