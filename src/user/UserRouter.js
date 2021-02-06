@@ -1,5 +1,6 @@
 import express from 'express';
 import { check, validationResult } from 'express-validator';
+import ForbiddenException from '../error/ForbiddenException.js';
 import ValidationException from '../error/ValidationException.js';
 import { pagination } from '../middleware/Pagination.js';
 import UserService from './UserService.js';
@@ -73,6 +74,10 @@ router.get('/api/1.0/users/:id', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+});
+
+router.put('/api/1.0/users/:id', () => {
+  throw new ForbiddenException('unauthroized_user_update');
 });
 
 export default router;

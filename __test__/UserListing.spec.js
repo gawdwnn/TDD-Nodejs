@@ -2,13 +2,15 @@ import request from 'supertest';
 import app from '../src/app.js';
 import sequelize from '../config/database.js';
 import User from '../src/user/User.js';
+import en from '../locales/en/translation.json';
+import tr from '../locales/tr/translation.json';
 
 beforeAll(async () => {
   await sequelize.sync();
 });
 
-beforeEach(() => {
-  return User.destroy({ truncate: true });
+beforeEach(async () => {
+  await User.destroy({ truncate: true });
 });
 
 const getUsers = () => request(app).get('/api/1.0/users');
@@ -116,8 +118,8 @@ describe('Get User', () => {
 
   it.each`
     language | message
-    ${'tr'}  | ${'Kullanıcı bulunamadı'}
-    ${'en'}  | ${'User not found'}
+    ${'tr'}  | ${tr.user_not_found}
+    ${'en'}  | ${en.user_not_found}
   `(
     'returns $message for unknown user when language is set to $language',
     async ({ language, message }) => {

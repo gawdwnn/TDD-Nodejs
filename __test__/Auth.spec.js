@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import app from '../src/app.js';
 import sequelize from '../config/database.js';
 import User from '../src/user/User.js';
+import en from '../locales/en/translation.json';
+import tr from '../locales/tr/translation.json';
 
 beforeAll(async () => {
   await sequelize.sync();
@@ -64,8 +66,8 @@ describe('Authentication', () => {
 
   it.each`
     language | message
-    ${'tr'}  | ${'Kullanıcı bilgileri hatalı'}
-    ${'en'}  | ${'Incorrect credentials'}
+    ${'tr'}  | ${tr.authentication_failure}
+    ${'en'}  | ${en.authentication_failure}
   `(
     'returns $message when authentication fails and language is set as $language',
     async ({ language, message }) => {
@@ -101,8 +103,8 @@ describe('Authentication', () => {
 
   it.each`
     language | message
-    ${'tr'}  | ${'Hesabınız aktif değil'}
-    ${'en'}  | ${'Account is inactive'}
+    ${'tr'}  | ${tr.inactive_authentication_failure}
+    ${'en'}  | ${en.inactive_authentication_failure}
   `(
     'returns $message when authentication fails for inactive account and language is set as $language',
     async ({ language, message }) => {

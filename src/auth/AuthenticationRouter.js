@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { check, validationResult } from 'express-validator';
 import UserService from '../user/UserService.js';
 import AuthenticationException from './AuthenticationException.js';
-import ForbiddenException from './ForbiddenException.js';
+import ForbiddenException from '../error/ForbiddenException.js';
 
 const router = express.Router();
 
