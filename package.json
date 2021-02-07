@@ -23,6 +23,7 @@
     "i18next": "^19.8.4",
     "i18next-fs-backend": "^1.0.8",
     "i18next-http-middleware": "^3.1.0",
+    "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.4.17",
     "sequelize": "^6.4.0",
     "sqlite3": "^5.0.1"
