@@ -2,8 +2,8 @@ import express from 'express';
 import { check, validationResult } from 'express-validator';
 import ForbiddenException from '../error/ForbiddenException.js';
 import ValidationException from '../error/ValidationException.js';
-import basicAuthentication from '../middleware/basicAuthentication.js';
 import { pagination } from '../middleware/Pagination.js';
+import tokenAuthentication from '../middleware/tokenAuthentication.js';
 import UserService from './UserService.js';
 
 const router = express.Router();
@@ -62,7 +62,7 @@ router.post('/api/1.0/users/token/:token', async (req, res, next) => {
   }
 });
 
-router.get('/api/1.0/users', pagination, basicAuthentication, async (req, res) => {
+router.get('/api/1.0/users', pagination, tokenAuthentication, async (req, res) => {
   const authenticatedUser = req.authenticatedUser;
   const { page, size } = req.pagination;
   const users = await UserService.getUsers(page, size, authenticatedUser);
@@ -78,7 +78,7 @@ router.get('/api/1.0/users/:id', async (req, res, next) => {
   }
 });
 
-router.put('/api/1.0/users/:id', basicAuthentication, async (req, res, next) => {
+router.put('/api/1.0/users/:id', tokenAuthentication, async (req, res, next) => {
   const authenticatedUser = req.authenticatedUser;
 
   // eslint-disable-next-line eqeqeq
