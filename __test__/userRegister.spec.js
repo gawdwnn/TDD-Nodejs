@@ -288,6 +288,7 @@ describe('Internationalization', () => {
     expect(response.body.message).toBe(tr.validation_failure);
   });
 });
+
 describe('Account Activation', () => {
   it('activates the account when the correct token is sent', async () => {
     await postUser();

@@ -4,7 +4,7 @@ import { check, validationResult } from 'express-validator';
 import UserService from '../user/UserService.js';
 import AuthenticationException from './AuthenticationException.js';
 import ForbiddenException from '../error/ForbiddenException.js';
-import TokenService from './TokenService';
+import TokenService from './TokenService.js';
 
 const router = express.Router();
 
